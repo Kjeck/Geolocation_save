@@ -4,14 +4,13 @@
 
 __version__ = '1.0'
 
-from time import sleep
 from termcolor import cprint
 from pyfiglet import Figlet
 import folium
 import os
 import colorama
 
-# Включить поддержку ANSI для вывода цветного текста в консоле при конвертации в exe
+# Включить поддержку ANSI для цветного текста в консоле при конвертации в exe
 colorama.init()
 
 
@@ -68,13 +67,10 @@ def print_info(type='copyright', font='slant', color='yellow'):
 
 
 def main():
-    # os.system('CLS')
+    os.system('CLS')
     print_info('head')
     input_location()
     print_info()
-    # При конвертации в exe, что бы коносль не закрвалась сразу
-    # и было время прочитать последний вывод
-    sleep(3)
 
 
 if __name__ == '__main__':
