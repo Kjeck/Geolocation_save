@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/python3.10
-''' Сохранение геолокации на фрагмете карты в html файл '''
+''' Saves geolocation on the map to html file '''
 
 __version__ = '1.0'
 
@@ -10,7 +10,7 @@ import folium
 import os
 import colorama
 
-# Включить поддержку ANSI для цветного текста в консоле при конвертации в exe
+# Enable AHCI support for color text in the console when compiling in win app
 colorama.init()
 
 
