@@ -1,20 +1,34 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/python3.10
-''' Saves geolocation on the map to html file '''
+''' Saves geolocation on the map to html file & creat QR-code '''
 
-__version__ = '1.0'
+__version__ = '1.1'
 
 from termcolor import cprint
 from pyfiglet import Figlet
 import folium
 import os
 import colorama
+import qrcode
 
 # Enable AHCI support for color text in the console when compiling in win app
 colorama.init()
 
 
-def save_location(lat, lon):
+def save_location_qr(lat, lon):
+    data = f'https://maps.google.com/local?q={lat},{lon}'
+    file_name = f'location_{lat}_{lon}.png'
+    img = qrcode.make(data)
+    try:
+        img.save(file_name)
+        cprint('QR-code save to:     ' + file_name, 'yellow')
+        print()
+    except:
+        cprint('\nНе удалось сохранить QR-code\n', 'red')
+        print()
+
+
+def save_location_html(lat, lon):
     try:
         coordinates = (lat, lon)
         file_name = f'location_{lat}_{lon}.html'
@@ -25,10 +39,13 @@ def save_location(lat, lon):
         map.save(file_name)
         cprint('Geolocation save to: ' + file_name, 'yellow')
 
-        print()
-        os.startfile(file_name)
+        save_location_qr(lat, lon)
+        try:
+            os.startfile(file_name)
+        except:
+            pass
     except:
-        cprint('\nЧто то пошло не так :( \n', 'red')
+        cprint('\nНе удалось сохранить локацию в файл\n', 'red')
 
 
 def input_location():
@@ -46,7 +63,7 @@ def input_location():
 
                 lat = lat.replace(',', '.')
                 lon = lon.replace(',', '.')
-                save_location(lat, lon)
+                save_location_html(lat, lon)
             else:
                 cprint('Введите координаты через пробел!', 'red')
         else:
