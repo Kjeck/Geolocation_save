@@ -4,6 +4,7 @@
 
 __version__ = '1.1'
 
+from time import sleep
 from termcolor import cprint
 from pyfiglet import Figlet
 import folium
@@ -88,6 +89,8 @@ def main():
     print_info('head')
     input_location()
     print_info()
+    # For compilations to win app
+    sleep(3)
 
 
 if __name__ == '__main__':
